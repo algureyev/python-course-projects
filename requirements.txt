@@ -1,0 +1,10 @@
+# Инструменты разработки
+black
+flake8
+isort
+
+# Популярные библиотеки для заданий
+pandas
+numpy
+matplotlib
+flask

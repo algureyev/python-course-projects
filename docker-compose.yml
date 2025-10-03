@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  python_dev:
+    build: .
+    container_name: python_course
+    volumes:
+      - .:/app  # Синхронизация кода между хостом и контейнером
+      - /app/__pycache__  # Игнорируем кэш Python в volume
+    working_dir: /app
+    tty: true
+    stdin_open: true
+    command: tail -f /dev/null  # Контейнер работает в фоне
