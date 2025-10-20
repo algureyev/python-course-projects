@@ -1,12 +1,12 @@
-version: '3.8'
-
 services:
   python_dev:
     build: .
     container_name: python_course
+    ports:
+    - "8888:8888"
     volumes:
       - .:/app  # Синхронизация кода между хостом и контейнером
-      - /app/__pycache__  # Игнорируем кэш Python в volume
+      # - /app/__pycache__  # Игнорируем кэш Python в volume
     working_dir: /app
     tty: true
     stdin_open: true

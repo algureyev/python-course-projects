@@ -2,9 +2,16 @@
 black
 flake8
 isort
+ipykernel
+jupyter
 
 # Популярные библиотеки для заданий
 pandas
 numpy
 matplotlib
 flask
+openpyxl
+requests
+
+# Библиотека для подключения к БД
+psycopg2
