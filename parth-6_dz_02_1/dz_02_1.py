@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import io
 from abc import ABC, abstractmethod
 
 
@@ -28,12 +29,22 @@ class WoysaLoader(Model):
             cls._instance = super(WoysaLoader, cls).__new__(cls)
         return cls._instance
     
-    def get_data(self, categories):
-        """Получение данных с сайта по массиву категорий"""
+    def get_data(self, categories: list[int]) -> pd.DataFrame:
+        """
+        Получение данных с сайта по массиву категорий
+
+        Args:
+            categories: список идентификаторов категорий
+            
+        Returns:
+            pd.DataFrame: DataFrame с объединенными данными по всем категориям
+        """
         if not categories:
             return pd.DataFrame()
         
         all_data = []
+        session = requests.Session()
+
         for category in categories:
             params = {
                 'skip': 0,
@@ -53,16 +64,31 @@ class WoysaLoader(Model):
                 'id_cat': category
             }
             
-            response = requests.get(self._url, params=params)
-            if response.status_code == 200:
-                df = pd.read_excel(response.content)
+            try:
+                response = session.get(self._url, params=params, timeout=10)
+                response.raise_for_status()
+            
+                df = pd.read_excel(io.BytesIO(response.content))
                 df['category'] = category
                 all_data.append(df)
+            
+            except requests.exceptions.RequestException as e:
+                print(f"Ошибка при запросе категории {category}: {e}")
+                continue
         
         return pd.concat(all_data, ignore_index=True) if all_data else pd.DataFrame()
     
-    def parse_data(self, data):
-        """Преобразование DataFrame в словарь"""
+    def parse_data(self, data: pd.DataFrame) -> list[dict]:
+        """
+        Преобразование DataFrame в словарь
+        
+        Args:
+            data: DataFrame для преобразования
+            
+        Returns:
+            list[dict]: список словарей с данными
+            
+        """
         return data.to_dict('records') if not data.empty else {}
 
 
@@ -74,8 +100,8 @@ if __name__ == "__main__":
     categories = [10000, 15000]
     data_frame = loader.get_data(categories)
 
-    print("Первые 5 строк полученого датафрейма")
-    print(data_frame.head())
+    print("Первые 2 строки полученого датафрейма")
+    print(data_frame.head(2))
 
     # Преобразуем в словарь
     data_dict = loader.parse_data(data_frame)
@@ -86,3 +112,4 @@ if __name__ == "__main__":
     
     print(f"Получено {len(data_frame)} записей")
     print(f"Преобразовано в {len(data_dict)} словарей")
+
