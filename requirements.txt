@@ -12,6 +12,8 @@ matplotlib
 flask
 openpyxl
 requests
+asyncio
+aiohttp
 
 # Библиотека для подключения к БД
 psycopg2
