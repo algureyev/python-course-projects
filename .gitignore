@@ -18,3 +18,4 @@ coverage.xml
 .ipynb_checkpoints/
 .idea/
 .vscode/
+config.py

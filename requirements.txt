@@ -34,3 +34,5 @@ openpyxl                   # Работа с Excel файлами
 # БАЗЫ ДАННЫХ
 # ===========================
 psycopg2                   # PostgreSQL адаптер для Python
+sqlalchemy                # ORM и построение запросов
+asyncpg                  # Асинхронный PostgreSQL адаптер
