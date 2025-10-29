@@ -3,7 +3,8 @@ services:
     build: .
     container_name: python_course
     ports:
-    - "8888:8888"
+      - "8888:8888"    # Для Jupyter
+      - "8000:8000"    # Для FastAPI
     volumes:
       - .:/app  # Синхронизация кода между хостом и контейнером
       # - /app/__pycache__  # Игнорируем кэш Python в volume
