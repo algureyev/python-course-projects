@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой прогресс</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="{{ url_for('progress') }}">Мой прогресс</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Мой прогресс в обучении</h1>
+        
+        <table class="progress-table">
+            <thead>
+                <tr>
+                    <th>Тема дисциплины</th>
+                    <th>Основы языка программирования Python</th>
+                    <th>ОС Linux: основы процессов и потоков</th>
+                    <th>Алгоритмы и структуры данных</th>
+                    <th>Базы данных</th>
+                    <th>Расширенные возможности Python</th>
+                    <th>Фреймворк Flask</th>
+                    <th>Фреймворк Django</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>% выполнения темы</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>75%</td>
+                </tr>
+                <tr>
+                    <td>% выполнения ДЗ</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>75%</td>
+                    <td>30%</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>Комментарии</td>
+                    <td>Отличная тема. Все интересно и понятно</td>
+                    <td>Освоив блок запустил домашний сервер на ubuntu. Давно мечтал</td>
+                    <td>SQL давно юзаю. Было легко</td>
+                    <td>Было сложно</td>
+                    <td>Было очень сложно и мало...</td>
+                    <td>Пока нравится. Закрадываются мысли, что фронтенд тоже надо учить)</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

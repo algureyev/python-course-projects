@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог моих достижений</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+ <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="{{ url_for('progress') }}">Мой прогресс</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Блог моих достижений в Python</h1>
+            <p>Здесь я делюсь своими успехами в изучении программирования и разработки на Python</p>
+            <img src="{{ url_for('static', filename='achievement.jpg') }}" alt="Мои достижения">
+        </section>
+
+        <section class="skills">
+            <h2>Мои навыки</h2>
+            <div class="skills-grid">
+                <article class="skill-card">
+                    <h3>Основы языка программирования Python</h3>
+                    <p>Работа с библиотеками</p>
+                    <p>ООП</p>
+                </article>
+                <article class="skill-card">
+                    <h3>Система контроля версий Git</h3>
+                    <p>Работа в Git</p>
+                    <p>Работа в GitHub</p>
+                </article>
+                <article class="skill-card">
+                    <h3>ОС Linux: основы процессов и потоков</h3>
+                    <p>Работа в терминале</p>
+                    <p>Назначение прав доступа</p>
+                    <p>...и другое</p>
+                </article>
+                <article class="skill-card">
+                    <h3>Алгоритмы и структуры данных</h3>
+                    <p>Линейный поиск</p>
+                    <p>Массивы и работа с ними. Бинарный поиск</p>
+                    <p>Простые и сложные алгоритмы сортировки</p>
+                    <p>Рекурсия</p>
+                    </article>
+                <article class="skill-card">
+                    <h3>Базы данных</h3>
+                    <p>Работа с реляционными БД. Написание SQL-запросов</p>
+                </article>
+                <article class="skill-card">
+                    <h3>Flask</h3>
+                    <p>Написания web-приложений во фреймворке Flask</p>
+                    <p>Основы HTML & CSS </p>
+                </article>
+            </div>
+        </section>
+
+        <aside class="motivation">
+            <blockquote>
+                "Программирование - это не о том, чтобы знать все ответы, а о том, чтобы уметь их находить"
+            </blockquote>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Мой блог достижений. Все права защищены мною)))).</p>
+    </footer>
+</body>
+</html>
