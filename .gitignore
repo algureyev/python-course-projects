@@ -19,3 +19,5 @@ coverage.xml
 .idea/
 .vscode/
 config.py
+*.sqlite3
+db.sqlite3

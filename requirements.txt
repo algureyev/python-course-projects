@@ -22,6 +22,7 @@ matplotlib==3.8.2
 # ВЕБ-ФРЕЙМВОРКИ И HTTP
 # ===========================
 django==4.2.0
+django-ckeditor==6.7.0
 flask==3.0.0
 fastapi==0.104.1
 uvicorn==0.24.0
