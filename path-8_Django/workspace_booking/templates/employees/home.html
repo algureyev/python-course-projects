@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Бронирование рабочих мест{% endblock %}
+
+{% block content %}
+<section class="intro">
+    <h1>Добро пожаловать в систему бронирования рабочих мест</h1>
+    <p>Это современная система для управления рабочими местами и сотрудниками компании.</p>
+</section>
+
+<section class="featured-employees">
+    <h2>Наши сотрудники</h2>
+    <div class="employee-grid">
+        {% for employee in employees %}
+            {% include 'employees/employee_card.html' %}
+        {% empty %}
+            <p>Сотрудники не найдены.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,23 +1,82 @@
+# ======================
+# DJANGO И ПРИЛОЖЕНИЕ
+# ======================
+
+# Медиа файлы (загружаемые пользователями)
+media/
+
+# База данных
+*.sqlite3
+*.db
+db.sqlite3
+
+# пароль и логин подключения к БД
+config.py 
+
+# Статические файлы (собранные для продакшена)
+staticfiles/
+
+# Логи Django
+*.log
+
+
+# ======================
+# PYTHON
+# ======================
+
+# Байт-код
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
+
+# Виртуальные окружения
+.env
+.venv
 env/
+venv/
+
+
+# ======================
+# СИСТЕМНЫЕ ФАЙЛЫ
+# ======================
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# ======================
+# IDE И РЕДАКТОРЫ
+# ======================
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+# ======================
+# ПАКЕТЫ И ЗАВИСИМОСТИ
+# ======================
+
+# Pip
 pip-log.txt
 pip-delete-this-directory.txt
+
+# Tox
 .tox
+
+# Coverage reports
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
-*.log
-.DS_Store
-.ipynb_checkpoints/
-.idea/
-.vscode/
-config.py
-*.sqlite3
-db.sqlite3
+

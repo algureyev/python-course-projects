@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Бронирование рабочих мест{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'employees:employee_list' %}">Сотрудники</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'admin:index' %}">Админка</a></li>
+                    <li>Привет, {{ user.username }}! <a href="{% url 'admin:logout' %}">Выйти</a></li>
+                {% else %}
+                    <li><a href="{% url 'admin:login' %}">Войти</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2025. Учебный проект - Бронирование рабочих мест</p>
+    </footer>
+</body>
+</html>

@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
@@ -44,3 +45,34 @@ class EmployeeSkill(models.Model):
     class Meta:
         verbose_name = 'Навык сотрудника'
         verbose_name_plural = 'Навыки сотрудников'
+
+class EmployeeImage(models.Model):
+    employee = models.ForeignKey(
+        EmployeeProfile, 
+        on_delete=models.CASCADE, 
+        related_name='images',
+        verbose_name='Сотрудник'
+    )
+    image = models.ImageField(
+        upload_to='employee_images/',
+        verbose_name='Изображение'
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        verbose_name='Порядковый номер'
+    )
+    
+    class Meta:
+        verbose_name = 'Изображение сотрудника'
+        verbose_name_plural = 'Изображения сотрудников'
+        ordering = ['order']
+    
+    def __str__(self):
+        return f"Изображение {self.order} для {self.employee}"
+    
+    def delete(self, *args, **kwargs):
+        # Удаляем файл с диска при удалении записи
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super().delete(*args, **kwargs)

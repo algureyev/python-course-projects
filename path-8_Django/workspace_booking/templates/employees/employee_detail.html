@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ employee.first_name }} {{ employee.last_name }} - Бронирование рабочих мест{% endblock %}
+
+{% block content %}
+<div class="employee-detail">
+    <h1>{{ employee.first_name }} {{ employee.last_name }}</h1>
+    <p><strong>Пол:</strong> {{ employee.get_gender_display }}</p>
+    
+    <div class="skills-list">
+        <h3>Навыки:</h3>
+        {% for skill in employee.employeeskill_set.all %}
+            <div class="skill-item">
+                <span>{{ skill.skill.name }}</span>
+                <span>Уровень: {{ skill.level }}/10</span>
+            </div>
+        {% empty %}
+            <p>Навыки не указаны</p>
+        {% endfor %}
+    </div>
+    
+    {% if employee.images.all %}
+    <div class="gallery">
+        <h3>Галерея:</h3>
+        {% for image in employee.images.all %}
+            <img src="{{ image.image.url }}" alt="Фото сотрудника {{ forloop.counter }}">
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

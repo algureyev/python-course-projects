@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Список сотрудников - Бронирование рабочих мест{% endblock %}
+
+{% block content %}
+<h1>Все сотрудники</h1>
+<div class="employee-grid">
+    {% for employee in employees %}
+        {% include 'employees/employee_card.html' %}
+    {% empty %}
+        <p>Сотрудники не найдены.</p>
+    {% endfor %}
+</div>
+{% endblock %}
