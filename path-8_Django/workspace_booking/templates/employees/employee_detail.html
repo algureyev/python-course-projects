@@ -4,9 +4,29 @@
 
 {% block content %}
 <div class="employee-detail">
+    <!-- Заглавное фото -->
+    {% with first_image=employee.get_first_image %}
+        {% if first_image %}
+            <div class="main-photo">
+                <img src="{{ first_image.image.url }}" alt="{{ employee.first_name }} {{ employee.last_name }}">
+            </div>
+        {% endif %}
+    {% endwith %}
+    
     <h1>{{ employee.first_name }} {{ employee.last_name }}</h1>
     <p><strong>Пол:</strong> {{ employee.get_gender_display }}</p>
     
+    <!-- Стаж работы -->
+    <p><strong>Стаж работы:</strong> {{ employee.work_experience_days }} дней</p>
+    
+    <!-- Номер стола -->
+    {% if employee.workplace %}
+        <p><strong>Номер стола:</strong> {{ employee.workplace.table_number }}</p>
+    {% else %}
+        <p><strong>Номер стола:</strong> Не назначен</p>
+    {% endif %}
+    
+    <!-- Навыки -->
     <div class="skills-list">
         <h3>Навыки:</h3>
         {% for skill in employee.employeeskill_set.all %}
@@ -19,13 +39,18 @@
         {% endfor %}
     </div>
     
-    {% if employee.images.all %}
-    <div class="gallery">
-        <h3>Галерея:</h3>
-        {% for image in employee.images.all %}
-            <img src="{{ image.image.url }}" alt="Фото сотрудника {{ forloop.counter }}">
-        {% endfor %}
-    </div>
-    {% endif %}
+    <!-- Галерея изображений (без первого) -->
+    {% with images=employee.images.all %}
+        {% if images|length > 1 %}
+        <div class="gallery">
+            <h3>Галерея:</h3>
+            {% for image in images %}
+                {% if not forloop.first %}  <!-- Пропускаем первое изображение -->
+                    <img src="{{ image.image.url }}" alt="Фото сотрудника {{ forloop.counter }}">
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
 </div>
 {% endblock %}

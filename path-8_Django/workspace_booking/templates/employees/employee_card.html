@@ -1,11 +1,41 @@
-<a href="{% url 'employees:employee_detail' employee.pk %}" class="employee-card">
-    <h3>{{ employee.first_name }} {{ employee.last_name }}</h3>
-    <div class="skills-list">
-        {% for skill in employee.employeeskill_set.all %}
-            <span class="skill">{{ skill.skill.name }} ({{ skill.level }})</span>
-            {% if not forloop.last %}, {% endif %}
-        {% empty %}
-            <span>Навыки не указаны</span>
-        {% endfor %}
+<div class="employee-card {% if not employee.get_first_image %}no-photo{% endif %}">
+    <!-- Левая часть - фотография -->
+    <div class="employee-photo">
+        {% with first_image=employee.get_first_image %}
+            {% if first_image %}
+                <img src="{{ first_image.image.url }}" alt="{{ employee.first_name }} {{ employee.last_name }}">
+            {% else %}
+                <span>Нет фото</span>
+            {% endif %}
+        {% endwith %}
     </div>
-</a>
+    
+    <!-- Правая часть - информация -->
+    <div class="employee-info">
+        <!-- Верхняя часть - имя и фамилия -->
+        <div class="employee-name">
+            <h3>{{ employee.first_name }} {{ employee.last_name }}</h3>
+        </div>
+        
+        <!-- Средняя часть - стаж -->
+        <div class="work-experience">
+            Стаж: {{ employee.work_experience_days }} дней
+        </div>
+        
+        <!-- Нижняя часть - навыки -->
+        <div class="employee-skills">
+            <div class="skills-list">
+                {% for skill in employee.employeeskill_set.all %}
+                    <div class="skill-item">
+                        <span class="skill-name">{{ skill.skill.name }}</span>
+                        <span class="skill-level">{{ skill.level }}/10</span>
+                    </div>
+                {% empty %}
+                    <div class="skill-item">
+                        <span class="skill-name">Навыки не указаны</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

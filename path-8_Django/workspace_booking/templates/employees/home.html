@@ -5,14 +5,21 @@
 {% block content %}
 <section class="intro">
     <h1>Добро пожаловать в систему бронирования рабочих мест</h1>
-    <p>Это современная система для управления рабочими местами и сотрудниками компании.</p>
+    <p>Это современная система для управления рабочими местами и сотрудниками вашей компании.</p>
+    
+    <!-- Общее количество сотрудников -->
+    <div class="stats">
+        <h3>Общее количество сотрудников: {{ total_employees }}</h3>
+    </div>
 </section>
 
 <section class="featured-employees">
-    <h2>Наши сотрудники</h2>
+    <h2>Новые сотрудники</h2>
     <div class="employee-grid">
         {% for employee in employees %}
-            {% include 'employees/employee_card.html' %}
+            <a href="{% url 'employees:employee_detail' employee.pk %}" class="employee-card-link">
+                {% include 'employees/employee_card.html' %}
+            </a>
         {% empty %}
             <p>Сотрудники не найдены.</p>
         {% endfor %}

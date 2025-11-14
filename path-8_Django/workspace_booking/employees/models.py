@@ -1,7 +1,9 @@
 import os
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from ckeditor.fields import RichTextField
+from datetime import date
 
 class Skill(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название навыка')
@@ -26,10 +28,18 @@ class EmployeeProfile(models.Model):
     middle_name = models.CharField(max_length=100, blank=True, verbose_name='Отчество')
     skills = models.ManyToManyField(Skill, through='EmployeeSkill', verbose_name='Навыки')
     description = RichTextField(verbose_name='Описание', blank=True)
+    hire_date = models.DateField(verbose_name='Дата приёма на работу', default=date.today)
     
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
     
+    def work_experience_days(self):
+        """Стаж работы в днях"""
+        return (date.today() - self.hire_date).days
+    
+    def get_first_image(self):
+        """Получить первое изображение из галереи"""
+        return self.images.first()
     class Meta:
         verbose_name = 'Профиль сотрудника'
         verbose_name_plural = 'Профили сотрудников'
