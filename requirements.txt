@@ -39,6 +39,14 @@ pytest-cov==4.1.0
 factory-boy==3.3.0
 
 # ===========================
+# DJANGO REST FRAMEWORK
+# ===========================
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+djangorestframework-simplejwt==5.3.0
+django-filter==23.3
+
+# ===========================
 # РАБОТА С ФАЙЛАМИ И ФОРМАТАМИ
 # ===========================
 openpyxl==3.1.2
